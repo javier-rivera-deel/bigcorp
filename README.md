@@ -18,3 +18,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ### Limitations
 
 So far, the application only shows a hardcoded endpoint, which is showing the full employee tree, according the API documentation. Additional settings are a in progress.
+
+Visit [the app website](https://havebeeair.com/bigcorp/) to see more.
