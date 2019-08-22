@@ -5,9 +5,13 @@
 }
 
 .employee-title {
+  font-family: 'Roboto';
   font-size: 24px;
-  padding: 2px;
   font-weight: 500
+}
+
+.employee-children-icon {
+  align-self: flex-end
 }
 
 .App {
@@ -15,9 +19,4 @@
   display: flex;
   height: 100vh;
   padding: 20px;
-}
-
-.InputSetting {
-  width: 50% !important;
-  background-color: red
 }
