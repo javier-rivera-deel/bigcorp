@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/bigcorp/static/css/main.d3fca434.chunk.css",
-    "main.js": "/bigcorp/static/js/main.f090c8b1.chunk.js",
-    "main.js.map": "/bigcorp/static/js/main.f090c8b1.chunk.js.map",
+    "main.css": "/bigcorp/static/css/main.3cc63067.chunk.css",
+    "main.js": "/bigcorp/static/js/main.8f0aed2b.chunk.js",
+    "main.js.map": "/bigcorp/static/js/main.8f0aed2b.chunk.js.map",
     "runtime~main.js": "/bigcorp/static/js/runtime~main.9e60ed59.js",
     "runtime~main.js.map": "/bigcorp/static/js/runtime~main.9e60ed59.js.map",
-    "static/js/2.e7a14e83.chunk.js": "/bigcorp/static/js/2.e7a14e83.chunk.js",
-    "static/js/2.e7a14e83.chunk.js.map": "/bigcorp/static/js/2.e7a14e83.chunk.js.map",
+    "static/js/2.8d4dfdda.chunk.js": "/bigcorp/static/js/2.8d4dfdda.chunk.js",
+    "static/js/2.8d4dfdda.chunk.js.map": "/bigcorp/static/js/2.8d4dfdda.chunk.js.map",
     "index.html": "/bigcorp/index.html",
-    "precache-manifest.5a685871aa6fdad61db44bb17c241079.js": "/bigcorp/precache-manifest.5a685871aa6fdad61db44bb17c241079.js",
+    "precache-manifest.27264047d24b6cd6d28e9e3cc089b93e.js": "/bigcorp/precache-manifest.27264047d24b6cd6d28e9e3cc089b93e.js",
     "service-worker.js": "/bigcorp/service-worker.js",
-    "static/css/main.d3fca434.chunk.css.map": "/bigcorp/static/css/main.d3fca434.chunk.css.map"
+    "static/css/main.3cc63067.chunk.css.map": "/bigcorp/static/css/main.3cc63067.chunk.css.map"
   }
 }
