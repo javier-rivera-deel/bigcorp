@@ -20,3 +20,25 @@
   height: 100vh;
   padding: 20px;
 }
+
+.InputSettings {
+  width: 35%;
+  height: 100%;
+}
+
+.Tree {
+  width: 65%;
+}
+
+@media only screen and (max-width: 750px) {
+ 
+  .App {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+  }
+
+  .InputSettings {
+    width: 100%;
+  }
+}

@@ -58,20 +58,22 @@ export default class App extends Component {
 		return (
 			<div className={"App"} id="treeWrapper" style={treeStyle}>
 				<InputSettings className="InputSetting" />
-				{dataReady && (
-					<Tree
-						translate={{ x: findMiddlePosition("x"), y: 80 }}
-						orientation="vertical"
-						pathFunc="straight"
-						data={data}
-						nodeSize={nodeSize}
-						allowForeignObjects
-						nodeLabelComponent={{
-							render: <NodeLabel className="myLabelComponentInSvg" />,
-							foreignObjectWrapper: foreignObject
-						}}
-					/>
-				)}
+				<div className="Tree">
+					{dataReady && (
+						<Tree
+							translate={{ x: findMiddlePosition("x"), y: 80 }}
+							orientation="vertical"
+							pathFunc="straight"
+							data={data}
+							nodeSize={nodeSize}
+							allowForeignObjects
+							nodeLabelComponent={{
+								render: <NodeLabel className="myLabelComponentInSvg" />,
+								foreignObjectWrapper: foreignObject
+							}}
+						/>
+					)}
+				</div>
 			</div>
 		);
 	}
