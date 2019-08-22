@@ -2,14 +2,19 @@
 
 This tool allows to visualize an organizational chart.
 
-In the project directory, you can run::
+** Instructions to run this project locally: **
+
+Download or clone this repo, and inside the cloned directory, perform a:
+
+### `npm install`
+
+Then, on the project directory, you can run::
 
 ### `npm start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Limitations
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+So far, the application only shows a hardcoded endpoint, which is showing the full employee tree, according the API documentation. Additional settings are a in progress.
