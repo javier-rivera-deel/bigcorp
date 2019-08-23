@@ -7,16 +7,15 @@ import { GoDiffAdded, GoDiffRemoved } from "react-icons/go";
 export default class NodeLabel extends React.PureComponent {
 	render() {
 		const { className, nodeData } = this.props;
-
 		return (
 			<div style={employeeCard} className={className}>
 				<div className="employee-info">
-					<div className="employee-title">{nodeData.name}</div>
-					<div>Department: {nodeData.attributes.department}</div>
+					<div className="employee-title">{`${nodeData.first} ${nodeData.last}`}</div>
+					<div>Department: {nodeData.department}</div>
 					<div>
 						Office:{" "}
-						{nodeData.attributes.office
-							? nodeData.attributes.office
+						{nodeData.office
+							? nodeData.office
 							: "Info not available"}
 					</div>
 				</div>

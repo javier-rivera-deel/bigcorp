@@ -75,3 +75,47 @@ export const createDataTree = siblingGroup => {
 	root[0].children = siblingGroup[directChildrenIndex];
 	return root;
 };
+
+// I COULD CREATE ARRAYS OF SIBLINGS THAT SHARES THE SAME MANAGER ID.
+// THOSE SIBLINGS WILL BE CHILDREN OF NODES WITH THE SAME ID.
+
+// LETS SAY I CREATE MY SIBLING GROUPS, STARTING WITH MY ROOT NODE
+const siblingGroups = [
+	{
+		managerId: 1,
+		siblings: []
+	},
+	{
+		managerId: 2,
+		siblings: []
+	},
+]
+// WITH THIS, I COULD LOOP OVER THIS GROUPS, AND ATTACH THEM AS CHILDREN IF THE ID MATCHES
+// BASICALLY I'M FINDING THE PARENT OF THE GROUP
+
+
+export const createDataTree1 = dataset => {
+  let hashTable = {};
+  let lowestManager = dataset[0].manager;
+
+  dataset.forEach(aData => {
+    if (lowestManager > aData.manager) lowestManager = aData.manager;
+
+    hashTable[aData.id] = { ...aData, children: [] };
+  });
+  let dataTree = [];
+
+  dataset.forEach(data => {
+
+    if(hashTable.hasOwnProperty(data.manager)) {
+      hashTable[data.manager].children.push(hashTable[data.id]);
+    } else if (data.manager === lowestManager || data.id === lowestManager) {
+          dataTree.push(hashTable[data.id]);
+    } else {
+    }
+  });
+
+  // console.log(dataTree);
+
+  return dataTree;
+};

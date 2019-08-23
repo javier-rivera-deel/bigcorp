@@ -28,7 +28,7 @@ export default function InputSettings() {
 	};
 	return (
 		<div className="InputSettings">
-			<Paper elevation="2" square className={classes.root}>
+			<Paper elevation={2} square className={classes.root}>
 				<Typography variant="h5" component="h3">
 					Organizational Chart Generator
 				</Typography>
