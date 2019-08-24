@@ -26,12 +26,21 @@
   height: 100%;
 }
 
+#react-org-chart {
+  background-color: #f7f9fa;
+  height:500px;
+}
+
+#icon {
+  display: none;
+}
+
 .Tree {
-  width: 65%;
+  /* width: 65%; */
 }
 
 @media only screen and (max-width: 750px) {
- 
+
   .App {
     display: flex;
     flex-direction: column;

@@ -189,3 +189,90 @@ export const tree = [
     office: 3
   }
 ];
+
+export const readyTree = {
+  "first": "Stephen",
+  "last": "Baker",
+	"id": 9,
+	"person":{
+		"name": "Stephen Baker",
+		"title": "CEO",
+		totalReports: 3,
+
+	},
+  "manager": 0,
+  "department": 2,
+  "office": 1,
+  "children": [
+    {
+      "first": "Daniel",
+      "last": "Smith",
+			"id": 2,
+			"person":{
+				"name": "Daniel Smith"
+			},
+      "manager": 9,
+      "department": 5,
+      "office": 2,
+      "children": [
+        {
+          "first": "Jerry",
+          "last": "Sanders",
+          "id": 5,
+          "manager": 2,
+          "department": 7,
+          "office": 5,
+          "children": []
+        },
+        {
+          "first": "Daniel",
+          "last": "Phillips",
+          "id": 6,
+          "manager": 2,
+          "department": 4,
+          "office": 1,
+          "children": []
+        },
+        {
+          "first": "Raymond",
+          "last": "Allen",
+          "id": 7,
+          "manager": 2,
+          "department": 5,
+          "office": 3,
+          "children": []
+        }
+      ]
+    },
+    {
+      "first": "Thomas",
+      "last": "Parker",
+			"id": 3,
+			"person":{
+				"name": "Thomas Parker"
+			},
+      "manager": 9,
+      "department": 4,
+      "office": null,
+      "children": []
+    },
+    {
+      "first": "Ruth",
+      "last": "Morgan",
+			"id": 4,
+			"person":{
+				"name": "Ruth Morgan",
+				"department": "mktg",
+				avatar: "https://www.w3schools.com/howto/img_avatar.png",
+				title: "Dept 5 - Office 3",
+				totalReports: 5,
+				link: false
+
+			},
+      "manager": 9,
+      "department": 6,
+      "office": 2,
+      "children": []
+    }
+  ]
+}
