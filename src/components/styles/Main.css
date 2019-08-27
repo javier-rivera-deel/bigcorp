@@ -1,0 +1,16 @@
+*, :before, :after {
+  box-sizing: border-box
+}
+
+
+
+.main-view {
+  display: flex;
+  padding: 15px;
+  background-color: rgb(206, 206, 206);
+  height: 100vh;
+}
+
+.settings {
+  position: absolute;
+}
