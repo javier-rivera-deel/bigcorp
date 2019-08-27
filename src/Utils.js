@@ -11,7 +11,8 @@ const randomAvatar = () => Math.floor(Math.random() * (4 - 0)) + 0;
 const setUserTitle = employee => {
 	const dept = employee.department ? `Dept. ${employee.department}` : "";
 	const office = employee.office ? `Office ${employee.office}` : "";
-	const title = dept + " " + office;
+	const manager = employee.manager ? `Manager: ${employee.manager}` : "";
+	const title = dept + " " + office + " " + manager;
 	return title;
 };
 
@@ -20,6 +21,7 @@ const setEmployeeObjectForLibrary = employee => {
 		id: employee.id,
 		manager: employee.manager,
 		person: {
+			department: employee.id.toString(),
 			name: employee.first + " " + employee.last,
 			title: setUserTitle(employee),
 			avatar: avatars[randomAvatar()],

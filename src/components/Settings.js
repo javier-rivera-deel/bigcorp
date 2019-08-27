@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ChartSettings from "./setting-panels/ChartSettings";
 import ManagerSettings from "./setting-panels/ManagerSettings";
 import EmployeeSettings from "./setting-panels/EmployeeSettings";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import AutorenewIcon from '@material-ui/icons/Autorenew';
+import Fade from '@material-ui/core/Fade';
+import "./styles/App.css"
+import { AppContext } from "../contexts/AppProvider";
+
 
 import { makeStyles } from "@material-ui/core/styles";
+import { whileStatement } from "@babel/types";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -34,7 +40,25 @@ const useStyles = makeStyles(theme => ({
 	},
 	hidden: {
 		display: "none"
-	}
+	},
+	searching: {
+		width: "100%",
+		height: "100%",
+		position: "absolute",
+		backgroundColor: "rgba(92, 241, 196, 0.83)",
+		color: "black",
+		zIndex: 2,
+		borderRadius: "4px",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		textAlign: "center",
+	},
+	motion: {
+		marginLeft: "5px",
+		animation: "rotation 2s infinite linear",
+	},
+
 }));
 
 export default function Settings() {
@@ -47,21 +71,23 @@ export default function Settings() {
 
 	return (
 		<div className={classes.root}>
-			<div className={visible ? classes.modal : classes.hidden}>
-				<Typography variant="h5">Organizational Chart Generator</Typography>
-				<Typography variant="subtitle1" gutterBottom>
-					This tool allows you to generate an organizational chart based on a
-					list of employees.
-				</Typography>
-				<Button
-					color="inherit"
-					variant="outlined"
-					className={classes.button}
-					onClick={handleClick}
-				>
-					Start
-				</Button>
-			</div>
+			<Fade in={visible}>
+				<div className={classes.modal}>
+					<Typography variant="h5">Organizational Chart Generator</Typography>
+					<Typography variant="subtitle1" gutterBottom>
+						This tool allows you to generate an organizational chart based on a
+						list of employees.
+					</Typography>
+					<Button
+						color="inherit"
+						variant="outlined"
+						className={classes.button}
+						onClick={handleClick}
+						>
+						Start
+					</Button>
+				</div>
+			</Fade>
 			<div>
 				<ChartSettings />
 				<ManagerSettings />

@@ -3,6 +3,7 @@ import { AppContext } from "../contexts/AppProvider";
 import { createDataTree } from "../Utils";
 
 import "./styles/App.css";
+import { identifier } from "@babel/types";
 const OrgChart = require("@latticehr/react-org-chart");
 
 export default function Chart() {
@@ -26,8 +27,11 @@ export default function Chart() {
 			const dataTree = createDataTree(employeeList)[0];
 			setData(dataTree);
 			setDataReady(true);
+
 		});
+
 	}
+
 	useEffect(() => {
 		var baseUrl = new URL(
 			"https://2jdg5klzl0.execute-api.us-west-1.amazonaws.com/default/EmployeesChart-Api"
@@ -45,8 +49,8 @@ export default function Chart() {
 			Object.keys(params).forEach(key =>
 				baseUrl.searchParams.append(key, params[key])
 			);
-			fetchData(baseUrl);
 			setState({ fullSearch: false });
+			fetchData(baseUrl);
 		}
 		setDataReady(false);
 	}, [

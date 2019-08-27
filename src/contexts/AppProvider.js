@@ -11,7 +11,9 @@ export default function AppProvider({ children }) {
 		employeeId: 1,
 		fullSearch: false,
 		managerSearch: false,
-		employeeSearch: false
+		employeeSearch: false,
+		searching: false,
+		error: false
 	});
 
 	return (
