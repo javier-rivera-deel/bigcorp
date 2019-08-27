@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../contexts/AppProvider";
 import { createDataTree } from "../Utils";
-
 import "./styles/App.css";
-import { identifier } from "@babel/types";
 const OrgChart = require("@latticehr/react-org-chart");
 
 export default function Chart() {

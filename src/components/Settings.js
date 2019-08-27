@@ -8,10 +8,7 @@ import AutorenewIcon from '@material-ui/icons/Autorenew';
 import Fade from '@material-ui/core/Fade';
 import "./styles/App.css"
 import { AppContext } from "../contexts/AppProvider";
-
-
 import { makeStyles } from "@material-ui/core/styles";
-import { whileStatement } from "@babel/types";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -65,12 +62,23 @@ export default function Settings() {
 	const classes = useStyles();
 	const [visible, setVisible] = useState(true);
 
+	const { state, } = useContext(AppContext);
+	const {
+		dataReady,
+	} = state;
+
 	const handleClick = () => {
 		setVisible(false);
 	};
 
 	return (
 		<div className={classes.root}>
+			{!dataReady && (
+				<div className={classes.searching}>
+				<Typography variant="h5">Searching </Typography>
+				<AutorenewIcon className={classes.motion}/>
+			</div>
+			)}
 			<Fade in={visible}>
 				<div className={classes.modal}>
 					<Typography variant="h5">Organizational Chart Generator</Typography>
