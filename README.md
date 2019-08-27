@@ -1,6 +1,10 @@
 ## Big Corp Chart
 
-This tool allows to visualize an organizational chart.
+This tool allows to visualize an organizational chart. It's built on top of the D3 library, so the following features are available:
+
+- High-performance D3-based SVG rendering
+- Lazy-load children with a custom function
+- Handle up to 1 million collapsed nodes and 5,000 expanded nodes
 
 ** Instructions to run this project locally: **
 
@@ -14,9 +18,5 @@ Then, on the project directory, you can run::
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### Limitations
-
-So far, the application only shows a hardcoded endpoint, which is showing the full employee tree, according the API documentation. Additional settings are a in progress.
 
 Visit [the app website](https://havebeeair.com/bigcorp/) to see more.

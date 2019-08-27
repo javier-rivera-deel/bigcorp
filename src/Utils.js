@@ -30,7 +30,6 @@ const setEmployeeObjectForLibrary = employee => {
 };
 
 const appendReports = employee => {
-	debugger;
 	if (employee.children.length > 0) {
 		employee.person.totalReports = `${employee.children.length}`;
 		employee.children.forEach(child => {
@@ -40,23 +39,34 @@ const appendReports = employee => {
 	return employee;
 };
 
-export const createDataTree = dataset => {
-	let hashTable = {};
-	let lowestManager = dataset[0].manager;
+export const userHasId = (employeeList, id) => {
+	employeeList.forEach(employee => {
+		if (employee.manager === id) return;
+	});
+	return false;
+};
 
-	dataset.forEach(aData => {
-		if (lowestManager > aData.manager) lowestManager = aData.manager;
-		hashTable[aData.id] = setEmployeeObjectForLibrary(aData);
-	});
-	let dataTree = [];
-	dataset.forEach(data => {
-		if (hashTable.hasOwnProperty(data.manager)) {
-			hashTable[data.manager].children.push(hashTable[data.id]);
-		} else if (data.manager === lowestManager || data.id === lowestManager) {
-			dataTree.push(hashTable[data.id]);
-		} else {
-		}
-	});
-	appendReports(dataTree[0]);
-	return dataTree;
+export const createDataTree = dataset => {
+	if (dataset.length > 0) {
+		let hashTable = {};
+		let lowestManager = dataset[0].manager;
+
+		dataset.forEach(aData => {
+			if (lowestManager > aData.manager) lowestManager = aData.manager;
+			hashTable[aData.id] = setEmployeeObjectForLibrary(aData);
+		});
+		let dataTree = [];
+		dataset.forEach(data => {
+			if (hashTable.hasOwnProperty(data.manager)) {
+				hashTable[data.manager].children.push(hashTable[data.id]);
+			} else if (data.manager === lowestManager || data.id === lowestManager) {
+				dataTree.push(hashTable[data.id]);
+			} else {
+			}
+		});
+		appendReports(dataTree[0]);
+		return dataTree;
+	} else {
+		return dataset;
+	}
 };

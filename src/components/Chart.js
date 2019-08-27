@@ -59,9 +59,10 @@ export default function Chart() {
 		employeeSearch,
 		setState
 	]);
+
 	return (
 		<div>
-			{dataReady && (
+			{dataReady && data && (
 				<OrgChart
 					borderColor="black"
 					reportsColor="black"

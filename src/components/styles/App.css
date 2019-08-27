@@ -38,7 +38,6 @@
 
 #react-org-chart {
   background-color: rgb(206, 206, 206);
-  /* background-color: #f7f9fa; */
   height:100vh;
   width: 100vw;
   overflow: hidden;
@@ -46,10 +45,6 @@
 
 #icon {
   display: none;
-}
-
-.Tree {
-  /* width: 65%; */
 }
 
 @media only screen and (max-width: 750px) {

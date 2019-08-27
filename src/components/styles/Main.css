@@ -1,9 +1,3 @@
-*, :before, :after {
-  box-sizing: border-box
-}
-
-
-
 .main-view {
   display: flex;
   padding: 15px;
