@@ -1,7 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 *, :after, :before {
-  box-sizing: border-box
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.orgchart {
+  background-color: rgb(109, 109, 109);
+  height: 1200px;
+  width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center
 }
 
 .employee-title {
@@ -27,8 +37,11 @@
 }
 
 #react-org-chart {
-  background-color: #f7f9fa;
-  height:500px;
+  background-color: rgb(206, 206, 206);
+  /* background-color: #f7f9fa; */
+  height:100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
 #icon {
