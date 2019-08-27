@@ -62,11 +62,17 @@ export default function Settings() {
 	const classes = useStyles();
 	const [visible, setVisible] = useState(true);
 
+	const { state, } = useContext(AppContext);
+	const {
+		dataReady,
+	} = state;
+
 	const handleClick = () => {
 		setVisible(false);
 	};
 
 	return (
+		<div className={classes.root}>
 			<Fade in={visible}>
 				<div className={classes.modal}>
 					<Typography variant="h5">Organizational Chart Generator</Typography>
