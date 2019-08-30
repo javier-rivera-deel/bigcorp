@@ -46,14 +46,14 @@ const useStyles = makeStyles(theme => ({
 
 export default function EmployeeSettings() {
 	const classes = useStyles();
-	const [expanded, updatePanelState] = useContext(PanelContext);
+	// const [expanded, updatePanelState] = useContext(PanelContext);
 	const { state, setState } = useContext(AppContext);
 	const [values, setValues] = useState({
 		employeeId: state.employeeId
 	});
 
 	const handleChange = panel => (event, expanded) => {
-		updatePanelState(expanded ? panel : false);
+		setState(expanded ? panel : false);
 	};
 
 	const handleValueChange = name => event => {
@@ -70,7 +70,7 @@ export default function EmployeeSettings() {
 
 	return (
 		<ExpansionPanel
-			expanded={expanded === "panel3"}
+			expanded={state.expanded === "panel3"}
 			onChange={handleChange("panel3")}
 		>
 			<ExpansionPanelSummary

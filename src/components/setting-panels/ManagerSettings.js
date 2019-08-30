@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ManagerSettings() {
 	const classes = useStyles();
-	const [expanded, updatePanelState] = useContext(PanelContext);
+	// const [expanded, updatePanelState] = useContext(PanelContext);
 	const { state, setState } = useContext(AppContext);
 
 	const [values, setValues] = useState({
@@ -54,7 +54,7 @@ export default function ManagerSettings() {
 	});
 
 	const handleChange = panel => (event, expanded) => {
-		updatePanelState(expanded ? panel : false);
+		setState(expanded ? panel : false);
 	};
 
 	const handleValueChange = name => event => {
@@ -70,7 +70,7 @@ export default function ManagerSettings() {
 
 	return (
 		<ExpansionPanel
-			expanded={expanded === "panel2"}
+			expanded={state.expanded === "panel2"}
 			onChange={handleChange("panel2")}
 		>
 			<ExpansionPanelSummary
