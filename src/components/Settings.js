@@ -4,9 +4,9 @@ import ManagerSettings from "./setting-panels/ManagerSettings";
 import EmployeeSettings from "./setting-panels/EmployeeSettings";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import AutorenewIcon from '@material-ui/icons/Autorenew';
-import Fade from '@material-ui/core/Fade';
-import "./styles/App.css"
+import AutorenewIcon from "@material-ui/icons/Autorenew";
+import Fade from "@material-ui/core/Fade";
+import "./styles/App.css";
 import { AppContext } from "../contexts/AppProvider";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -49,23 +49,34 @@ const useStyles = makeStyles(theme => ({
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
-		textAlign: "center",
+		textAlign: "center"
 	},
 	motion: {
 		marginLeft: "5px",
-		animation: "rotation 2s infinite linear",
+		animation: "rotation 2s infinite linear"
 	},
-
+	error: {
+		width: "100%",
+		height: "100%",
+		position: "absolute",
+		backgroundColor: "#ff0000a1",
+		color: "white",
+		zIndex: 2,
+		borderRadius: "4px",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		flexDirection: "column",
+		textAlign: "center"
+	}
 }));
 
 export default function Settings() {
 	const classes = useStyles();
 	const [visible, setVisible] = useState(true);
 
-	const { state, } = useContext(AppContext);
-	const {
-		dataReady,
-	} = state;
+	const { state } = useContext(AppContext);
+	const { dataReady } = state;
 
 	const handleClick = () => {
 		setVisible(false);
@@ -85,11 +96,27 @@ export default function Settings() {
 						variant="outlined"
 						className={classes.button}
 						onClick={handleClick}
-						>
+					>
 						Start
 					</Button>
 				</div>
 			</Fade>
+			{state.error && (
+				<div className={classes.error}>
+					<Typography variant="h5">Error</Typography>
+					<Typography variant="subtitle1" gutterBottom>
+						There has been an error
+					</Typography>
+					<Button
+						color="inherit"
+						variant="outlined"
+						className={classes.button}
+						onClick={handleClick}
+					>
+						Close
+					</Button>
+				</div>
+			)}
 			<div>
 				<ChartSettings />
 				<ManagerSettings />

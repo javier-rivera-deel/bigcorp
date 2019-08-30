@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ChartSettings() {
 	const classes = useStyles();
-	// const [expanded, updatePanelState] = useContext(PanelContext);
+	const [expanded, updatePanelState] = useContext(PanelContext);
 	const { state, setState } = useContext(AppContext);
 	const [values, setValues] = useState({
 		limit: state.limit,
@@ -51,8 +51,7 @@ export default function ChartSettings() {
 	});
 
 	const handleChange = panel => (event, expanded) => {
-		debugger;
-		setState(expanded ? panel : false);
+		updatePanelState(expanded ? panel : false);
 	};
 
 	const handleValueChange = name => event => {
@@ -68,7 +67,7 @@ export default function ChartSettings() {
 
 	return (
 		<ExpansionPanel
-			expanded={state.expanded === "panel1"}
+			expanded={expanded === "panel1"}
 			onChange={handleChange("panel1")}
 		>
 			<ExpansionPanelSummary

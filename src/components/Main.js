@@ -10,8 +10,10 @@ export default function Main() {
 	return (
 		<div className="main-view">
 			<AppProvider>
-				<Settings className="settings" />
-				<Chart />
+				<SettingsProvider>
+					<Settings className="settings" />
+					<Chart />
+				</SettingsProvider>
 			</AppProvider>
 		</div>
 	);

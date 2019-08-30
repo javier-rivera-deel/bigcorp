@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { PanelContext } from "../../contexts/SettingsProvider";
 import { AppContext } from "../../contexts/AppProvider";
+import { baseUrl } from "../../Utils";
 
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -46,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ManagerSettings() {
 	const classes = useStyles();
-	// const [expanded, updatePanelState] = useContext(PanelContext);
+	const [expanded, updatePanelState] = useContext(PanelContext);
 	const { state, setState } = useContext(AppContext);
 
 	const [values, setValues] = useState({
@@ -54,7 +55,7 @@ export default function ManagerSettings() {
 	});
 
 	const handleChange = panel => (event, expanded) => {
-		setState(expanded ? panel : false);
+		updatePanelState(expanded ? panel : false);
 	};
 
 	const handleValueChange = name => event => {
@@ -65,12 +66,13 @@ export default function ManagerSettings() {
 
 	const handleClick = () => {
 		const { managerId } = values;
-		setState({ managerId, managerSearch: true });
+		const url = `${baseUrl}?manager=${managerId}`;
+		setState({ url });
 	};
 
 	return (
 		<ExpansionPanel
-			expanded={state.expanded === "panel2"}
+			expanded={expanded === "panel2"}
 			onChange={handleChange("panel2")}
 		>
 			<ExpansionPanelSummary

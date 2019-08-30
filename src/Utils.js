@@ -72,3 +72,28 @@ export const createDataTree = dataset => {
 		return dataset;
 	}
 };
+
+export const baseUrl =
+	"https://2jdg5klzl0.execute-api.us-west-1.amazonaws.com/default/EmployeesChart-Api";
+
+// export const setUrl = (searchType) => {
+// 	let baseUrl = new URL(
+
+// 	);
+// 	if (managerSearch) {
+// 		const url = `${baseUrl}?manager=${managerId}`;
+// 		fetchData(url);
+// 		// setState({ managerSearch: false });
+// 	} else if (employeeSearch) {
+// 		const url = `${baseUrl}?id=${employeeId}`;
+// 		fetchData(url);
+// 		// setState({ employeeSearch: false });
+// 	} else if (fullSearch) {
+// 		const params = { limit, offset };
+// 		Object.keys(params).forEach(key =>
+// 			baseUrl.searchParams.append(key, params[key])
+// 		);
+// 		// setState({ fullSearch: false });
+// 		fetchData(baseUrl);
+// 	}
+// }

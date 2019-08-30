@@ -13,58 +13,59 @@ export default function Chart() {
 		employeeId,
 		managerSearch,
 		employeeSearch,
-		fullSearch
+		fullSearch,
+		data,
+		url,
+		dataReady
 	} = state;
 
-	const [dataReady, setDataReady] = useState(false);
-	const [data, setData] = useState(null);
-
-	async function fetchData(url) {
-		const res = await fetch(url);
-		res.json().then(employeeList => {
-			const dataTree = createDataTree(employeeList)[0];
-			setData(dataTree);
-			setDataReady(true);
-
-		});
-
-	}
+	// const [dataReady, setDataReady] = useState(false);
+	// const [data, setData] = useState(null);
 
 	useEffect(() => {
-		var baseUrl = new URL(
-			"https://2jdg5klzl0.execute-api.us-west-1.amazonaws.com/default/EmployeesChart-Api"
-		);
-		if (managerSearch) {
-			const url = `${baseUrl}?manager=${managerId}`;
-			fetchData(url);
-			setState({ managerSearch: false });
-		} else if (employeeSearch) {
-			const url = `${baseUrl}?id=${employeeId}`;
-			fetchData(url);
-			setState({ employeeSearch: false });
-		} else if (fullSearch) {
-			const params = { limit, offset };
-			Object.keys(params).forEach(key =>
-				baseUrl.searchParams.append(key, params[key])
-			);
-			setState({ fullSearch: false });
-			fetchData(baseUrl);
+		async function fetchData() {
+			try {
+				const res = await fetch(url);
+				res.json().then(employeeList => {
+					const data = createDataTree(employeeList)[0];
+					// setData(dataTree);
+					// setDataReady(true);
+					setState({ data, dataReady: true });
+					debugger;
+				});
+			} catch (err) {
+				console.log(`error ${err}`);
+				// set some state
+				setState({ error: true });
+			}
 		}
-		setDataReady(false);
-	}, [
-		employeeId,
-		managerId,
-		offset,
-		limit,
-		fullSearch,
-		managerSearch,
-		employeeSearch,
-		setState
-	]);
+		// var baseUrl = new URL(
+		// 	"https://2jdg5klzl0.execute-api.us-west-1.amazonaws.com/default/EmployeesChart-Api"
+		// );
+		// if (managerSearch) {
+		// 	const url = `${baseUrl}?manager=${managerId}`;
+		// 	fetchData(url);
+		// 	// setState({ managerSearch: false });
+		// } else if (employeeSearch) {
+		// 	const url = `${baseUrl}?id=${employeeId}`;
+		// 	fetchData(url);
+		// 	// setState({ employeeSearch: false });
+		// } else if (fullSearch) {
+		// 	const params = { limit, offset };
+		// 	Object.keys(params).forEach(key =>
+		// 		baseUrl.searchParams.append(key, params[key])
+		// 	);
+		// 	// setState({ fullSearch: false });
+		// 	fetchData(baseUrl);
+		// }
+		// setDataReady(false);
+		console.log("how about tad");
+		fetchData();
+	}, [setState, url]);
 
 	return (
 		<div>
-			{dataReady && data && (
+			{dataReady && (
 				<OrgChart
 					borderColor="black"
 					reportsColor="black"
