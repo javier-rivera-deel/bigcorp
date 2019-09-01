@@ -19,26 +19,28 @@ export default function Chart() {
 		dataReady
 	} = state;
 
-	// const [dataReady, setDataReady] = useState(false);
+	const [dataReady, setDataReady] = useState(false);
 	// const [data, setData] = useState(null);
 
 	useEffect(() => {
-		async function fetchData() {
+
+		const fetchData = async () => {
 			try {
-				const res = await fetch(url);
-				res.json().then(employeeList => {
-					const data = createDataTree(employeeList)[0];
+				const result = await fetch(url);
+
+				result.json().then(employeeList => {
+					// const data = createDataTree(employeeList)[0];
 					// setData(dataTree);
 					// setDataReady(true);
-					setState({ data, dataReady: true });
-					debugger;
+					setDataReady({ dataReady: employeeList });
 				});
 			} catch (err) {
 				console.log(`error ${err}`);
 				// set some state
-				setState({ error: true });
+				// setState({ error: true });
 			}
 		}
+
 		// var baseUrl = new URL(
 		// 	"https://2jdg5klzl0.execute-api.us-west-1.amazonaws.com/default/EmployeesChart-Api"
 		// );
@@ -61,7 +63,7 @@ export default function Chart() {
 		// setDataReady(false);
 		console.log("how about tad");
 		fetchData();
-	}, [setState, url]);
+	}, [url, data]);
 
 	return (
 		<div>
