@@ -59,7 +59,7 @@ export default function EmployeeSettings() {
 		employeeId: null
 	});
 	const [disabled, setDisabled] = useState(false);
-	const [buttonTitle, setButtonTitle] = useState("Find Employee");
+	const [buttonTitle] = useState("Find Employee");
 
 	const handleChange = panel => (event, expanded) => {
 		updatePanelState(expanded ? panel : false);
@@ -75,6 +75,7 @@ export default function EmployeeSettings() {
 	const handleClick = () => {
 		setDisabled(true);
 		const { employeeId } = values;
+		setPreviousValues({ employeeId });
 		const url = `${baseUrl}?id=${employeeId}`;
 		setState({ url, goFetch: true });
 	};
@@ -82,10 +83,8 @@ export default function EmployeeSettings() {
 	useEffect(() => {
 		if (!isEqual(values, previousValues)) {
 			setDisabled(false);
-			setButtonTitle("Find Employee");
 		} else {
 			setDisabled(true);
-			setButtonTitle("See the results >>");
 		}
 	}, [values, previousValues]);
 
@@ -93,7 +92,6 @@ export default function EmployeeSettings() {
 		if (expanded !== "panel3") {
 			setDisabled(false);
 			setPreviousValues({ employeeId: null });
-			setButtonTitle("Find Employee");
 		}
 	}, [expanded]);
 

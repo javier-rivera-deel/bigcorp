@@ -59,7 +59,7 @@ export default function ManagerSettings() {
 		managerId: null
 	});
 	const [disabled, setDisabled] = useState(false);
-	const [buttonTitle, setButtonTitle] = useState("Find Manager");
+	const [buttonTitle] = useState("Find Manager");
 
 	const handleChange = panel => (event, expanded) => {
 		updatePanelState(expanded ? panel : false);
@@ -74,6 +74,7 @@ export default function ManagerSettings() {
 	const handleClick = e => {
 		setDisabled(true);
 		const { managerId } = values;
+		setPreviousValues({ managerId });
 		const url = `${baseUrl}?manager=${managerId}`;
 		setState({ url, goFetch: true });
 	};
@@ -81,10 +82,8 @@ export default function ManagerSettings() {
 	useEffect(() => {
 		if (!isEqual(values, previousValues)) {
 			setDisabled(false);
-			setButtonTitle("Find Manager");
 		} else {
 			setDisabled(true);
-			setButtonTitle("See the results >>");
 		}
 	}, [values, previousValues]);
 
@@ -92,7 +91,6 @@ export default function ManagerSettings() {
 		if (expanded !== "panel2") {
 			setDisabled(false);
 			setPreviousValues({ managerId: null });
-			setButtonTitle("Find Manager");
 		}
 	}, [expanded]);
 

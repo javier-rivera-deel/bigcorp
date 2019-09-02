@@ -62,7 +62,7 @@ export default function ChartSettings() {
 		offset: null
 	});
 	const [disabled, setDisabled] = useState(false);
-	const [buttonTitle, setButtonTitle] = useState("Generate Chart");
+	const [buttonTitle] = useState("Generate Chart");
 
 	const handleChange = panel => (event, expanded) => {
 		updatePanelState(expanded ? panel : false);
@@ -78,10 +78,8 @@ export default function ChartSettings() {
 	useEffect(() => {
 		if (!isEqual(values, previousValues)) {
 			setDisabled(false);
-			setButtonTitle("Generate Chart");
 		} else {
 			setDisabled(true);
-			setButtonTitle("See the results >>");
 		}
 	}, [values, previousValues]);
 
@@ -89,7 +87,6 @@ export default function ChartSettings() {
 		if (expanded !== "panel1") {
 			setDisabled(false);
 			setPreviousValues({ limit: null, offset: null });
-			setButtonTitle("Generate Chart");
 		}
 	}, [expanded]);
 
