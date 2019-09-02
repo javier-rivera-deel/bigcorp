@@ -8,6 +8,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import DeviceHubTwoToneIcon from "@material-ui/icons/DeviceHubTwoTone";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -20,11 +21,10 @@ const baseUrl = new URL(
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		width: "30%",
-		position: "absolute"
+		backgroundColor: "#55e55e"
 	},
 	heading: {
-		fontSize: theme.typography.pxToRem(15),
+		fontSize: theme.typography.pxToRem(25),
 		flexBasis: "33.33%",
 		flexShrink: 0
 	},
@@ -41,11 +41,14 @@ const useStyles = makeStyles(theme => ({
 	button: {
 		margin: theme.spacing(1),
 		display: "block",
-		backgroundColor: "#022be8",
-		color: "white"
+		backgroundColor: "#eaeae"
 	},
 	input: {
-		display: "none"
+		display: "none",
+		color: "white"
+	},
+	summary: {
+		display: "block"
 	}
 }));
 
@@ -104,20 +107,24 @@ export default function ChartSettings() {
 
 	return (
 		<ExpansionPanel
+			className={classes.root}
 			expanded={expanded === "panel1"}
 			onChange={handleChange("panel1")}
 		>
 			<ExpansionPanelSummary
-				expandIcon={<ExpandMoreIcon />}
+				expandIcon={<ExpandMoreIcon fontSize="large" />}
 				aria-controls="panel1bh-content"
 				id="panel1bh-header"
 			>
-				<Typography className={classes.heading}>
-					Organizational Chart
-				</Typography>
-				<Typography className={classes.secondaryHeading}>
-					Generate the full tree, or a subset
-				</Typography>
+				<div className="summary">
+					<DeviceHubTwoToneIcon fontSize="large" />
+					<Typography className={classes.heading}>
+						Organizational Chart
+					</Typography>
+					<Typography className={classes.secondaryHeading}>
+						Generate the full tree, or a subset
+					</Typography>
+				</div>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
 				<form className={classes.container} autoComplete="off">

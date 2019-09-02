@@ -8,6 +8,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import PersonOutlineTwoToneIcon from "@material-ui/icons/PersonOutlineTwoTone";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -16,11 +17,10 @@ import { isEqual } from "lodash";
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		width: "30%",
-		position: "absolute"
+		backgroundColor: "#aafaee"
 	},
 	heading: {
-		fontSize: theme.typography.pxToRem(15),
+		fontSize: theme.typography.pxToRem(25),
 		flexBasis: "33.33%",
 		flexShrink: 0
 	},
@@ -40,11 +40,13 @@ const useStyles = makeStyles(theme => ({
 	},
 	button: {
 		margin: theme.spacing(1),
-		backgroundColor: "#48b53f",
-		color: "white"
+		backgroundColor: "#eaeae"
 	},
 	input: {
 		display: "none"
+	},
+	summary: {
+		display: "block"
 	}
 }));
 
@@ -97,18 +99,22 @@ export default function EmployeeSettings() {
 
 	return (
 		<ExpansionPanel
+			className={classes.root}
 			expanded={expanded === "panel3"}
 			onChange={handleChange("panel3")}
 		>
 			<ExpansionPanelSummary
-				expandIcon={<ExpandMoreIcon />}
+				expandIcon={<ExpandMoreIcon fontSize="large" />}
 				aria-controls="panel3bh-content"
 				id="panel3bh-header"
 			>
-				<Typography className={classes.heading}>Employees</Typography>
-				<Typography className={classes.secondaryHeading}>
-					Search for an individual employee
-				</Typography>
+				<div className="summary">
+					<PersonOutlineTwoToneIcon fontSize="large" />
+					<Typography className={classes.heading}>Employees</Typography>
+					<Typography className={classes.secondaryHeading}>
+						Search for an individual employee
+					</Typography>
+				</div>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
 				<form className={classes.container} autoComplete="off">

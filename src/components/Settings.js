@@ -17,7 +17,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		width: "600px",
+		width: "500px",
 		position: "absolute",
 		boxShadow: "-1px 2px 5px 0px rgba(0, 0, 0, 0.3)"
 	},
@@ -33,7 +33,8 @@ const useStyles = makeStyles(theme => ({
 		justifyContent: "center",
 		alignItems: "center",
 		flexDirection: "column",
-		textAlign: "center"
+		textAlign: "center",
+		padding: "30px"
 	},
 	closeIcon: {
 		position: "relative",
@@ -64,7 +65,7 @@ const useStyles = makeStyles(theme => ({
 		width: "100%",
 		height: "100%",
 		position: "absolute",
-		backgroundColor: "#ff0000a1",
+		backgroundColor: "#ff0000c9",
 		color: "white",
 		zIndex: 2,
 		borderRadius: "4px",
@@ -78,7 +79,7 @@ const useStyles = makeStyles(theme => ({
 		width: "100%",
 		height: "100%",
 		position: "absolute",
-		backgroundColor: "#a236a5a1",
+		backgroundColor: "#333333e0",
 		color: "white",
 		zIndex: 2,
 		borderRadius: "4px",
@@ -110,8 +111,6 @@ export default function Settings() {
 		setnoMatchVisible(true);
 	};
 
-	console.log("error :", state.error);
-	console.log("noMatch :", state.noMatch);
 	return (
 		<div className={classes.root}>
 			<Fade in={visible}>
@@ -126,6 +125,7 @@ export default function Settings() {
 						variant="outlined"
 						className={classes.button}
 						onClick={handleClick}
+						size="large"
 					>
 						Start
 					</Button>

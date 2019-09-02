@@ -6,7 +6,12 @@ This tool allows to visualize an organizational chart. It's built on top of the 
 - Lazy-load children with a custom function
 - Handle up to 1 million collapsed nodes and 5,000 expanded nodes
 
-** Instructions to run this project locally: **
+Additional features:
+
+- Zoom in/out of the chart by scrolling the mouse
+- Drag the chart around and expand reports to see hierarchy information
+
+**_ Instructions to run this project locally: _**
 
 Download or clone this repo, and inside the cloned directory, perform a:
 

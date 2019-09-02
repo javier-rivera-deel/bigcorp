@@ -8,6 +8,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import GroupTwoToneIcon from "@material-ui/icons/GroupTwoTone";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -16,11 +17,10 @@ import { isEqual } from "lodash";
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		width: "30%",
-		position: "absolute"
+		backgroundColor: "#00ff92d4"
 	},
 	heading: {
-		fontSize: theme.typography.pxToRem(15),
+		fontSize: theme.typography.pxToRem(25),
 		flexBasis: "33.33%",
 		flexShrink: 0
 	},
@@ -40,11 +40,13 @@ const useStyles = makeStyles(theme => ({
 	},
 	button: {
 		margin: theme.spacing(1),
-		backgroundColor: "#f1ad36",
-		color: "white"
+		backgroundColor: "#eaeae"
 	},
 	input: {
 		display: "none"
+	},
+	summary: {
+		display: "block"
 	}
 }));
 
@@ -96,18 +98,22 @@ export default function ManagerSettings() {
 
 	return (
 		<ExpansionPanel
+			className={classes.root}
 			expanded={expanded === "panel2"}
 			onChange={handleChange("panel2")}
 		>
 			<ExpansionPanelSummary
-				expandIcon={<ExpandMoreIcon />}
+				expandIcon={<ExpandMoreIcon fontSize="large" />}
 				aria-controls="panel2bh-content"
 				id="panel2bh-header"
 			>
-				<Typography className={classes.heading}>Managers</Typography>
-				<Typography className={classes.secondaryHeading}>
-					Search for a specific manager
-				</Typography>
+				<div className="summary">
+					<GroupTwoToneIcon fontSize="large" />
+					<Typography className={classes.heading}>Managers</Typography>
+					<Typography className={classes.secondaryHeading}>
+						Search for a specific manager
+					</Typography>
+				</div>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
 				<form className={classes.container} noValidate autoComplete="off">
