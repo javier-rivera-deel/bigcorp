@@ -7,6 +7,7 @@ import EmployeeSettings from "./setting-panels/EmployeeSettings";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Fade from "@material-ui/core/Fade";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 // custom styles
 import "./styles/App.css";

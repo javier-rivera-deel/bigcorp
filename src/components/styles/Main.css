@@ -5,6 +5,14 @@
   height: 100vh;
 }
 
+@media only screen and (max-width: 750px) {
+  .main-view {
+    padding: 0;
+    height: -webkit-fill-available;
+    width: 750px;
+  }
+}
+
 .settings {
   position: absolute;
 }
