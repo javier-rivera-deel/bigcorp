@@ -1,6 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { PanelContext } from "../../contexts/SettingsProvider";
 import { AppContext } from "../../contexts/AppProvider";
+import { baseUrl } from "../../Utils";
 
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -8,10 +9,10 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
-
 import Button from "@material-ui/core/Button";
-
 import TextField from "@material-ui/core/TextField";
+
+import { isEqual } from "lodash";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -31,13 +32,16 @@ const useStyles = makeStyles(theme => ({
 		marginLeft: theme.spacing(1),
 		marginRight: theme.spacing(1),
 		width: 200,
-		display: "block"
+		display: "block",
+		overflow: "visible"
 	},
 	container: {
 		display: "block"
 	},
 	button: {
-		margin: theme.spacing(1)
+		margin: theme.spacing(1),
+		backgroundColor: "#48b53f",
+		color: "white"
 	},
 	input: {
 		display: "none"
@@ -51,6 +55,11 @@ export default function EmployeeSettings() {
 	const [values, setValues] = useState({
 		employeeId: state.employeeId
 	});
+	const [previousValues, setPreviousValues] = useState({
+		employeeId: null
+	});
+	const [disabled, setDisabled] = useState(false);
+	const [buttonTitle] = useState("Find Employee");
 
 	const handleChange = panel => (event, expanded) => {
 		updatePanelState(expanded ? panel : false);
@@ -64,9 +73,27 @@ export default function EmployeeSettings() {
 	};
 
 	const handleClick = () => {
+		setDisabled(true);
 		const { employeeId } = values;
-		setState({ employeeId, employeeSearch: true });
+		setPreviousValues({ employeeId });
+		const url = `${baseUrl}?id=${employeeId}`;
+		setState({ url, goFetch: true });
 	};
+
+	useEffect(() => {
+		if (!isEqual(values, previousValues)) {
+			setDisabled(false);
+		} else {
+			setDisabled(true);
+		}
+	}, [values, previousValues]);
+
+	useEffect(() => {
+		if (expanded !== "panel3") {
+			setDisabled(false);
+			setPreviousValues({ employeeId: null });
+		}
+	}, [expanded]);
 
 	return (
 		<ExpansionPanel
@@ -94,14 +121,15 @@ export default function EmployeeSettings() {
 						value={parseInt(values.employeeId)}
 						onChange={handleValueChange("employeeId")}
 						margin="normal"
+						variant="outlined"
 					/>
 					<Button
-						color="primary"
 						variant="contained"
 						className={classes.button}
 						onClick={handleClick}
+						disabled={disabled}
 					>
-						Search Employee
+						{buttonTitle}
 					</Button>
 				</form>
 			</ExpansionPanelDetails>

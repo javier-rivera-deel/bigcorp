@@ -11,7 +11,7 @@ export default function Main() {
 		<div className="main-view">
 			<AppProvider>
 				<SettingsProvider>
-					<Settings className="settings" />
+					<Settings />
 					<Chart />
 				</SettingsProvider>
 			</AppProvider>

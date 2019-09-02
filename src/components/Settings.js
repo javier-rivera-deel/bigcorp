@@ -1,12 +1,17 @@
 import React, { useState, useContext } from "react";
+
+// material UI
 import ChartSettings from "./setting-panels/ChartSettings";
 import ManagerSettings from "./setting-panels/ManagerSettings";
 import EmployeeSettings from "./setting-panels/EmployeeSettings";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import AutorenewIcon from "@material-ui/icons/Autorenew";
 import Fade from "@material-ui/core/Fade";
+
+// custom styles
 import "./styles/App.css";
+
+// contexts
 import { AppContext } from "../contexts/AppProvider";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -68,20 +73,45 @@ const useStyles = makeStyles(theme => ({
 		alignItems: "center",
 		flexDirection: "column",
 		textAlign: "center"
+	},
+	noMatch: {
+		width: "100%",
+		height: "100%",
+		position: "absolute",
+		backgroundColor: "#a236a5a1",
+		color: "white",
+		zIndex: 2,
+		borderRadius: "4px",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		flexDirection: "column",
+		textAlign: "center"
 	}
 }));
 
 export default function Settings() {
 	const classes = useStyles();
 	const [visible, setVisible] = useState(true);
+	const [errorVisible, setErrorVisible] = useState(true);
+	const [noMatchVisible, setnoMatchVisible] = useState(true);
 
-	const { state } = useContext(AppContext);
-	const { dataReady } = state;
+	const { state, setState } = useContext(AppContext);
 
 	const handleClick = () => {
 		setVisible(false);
 	};
+	const handleErrorClick = () => {
+		setState({ error: false });
+		setErrorVisible(true);
+	};
+	const handleNoMatchClick = () => {
+		setState({ noMatch: false });
+		setnoMatchVisible(true);
+	};
 
+	console.log("error :", state.error);
+	console.log("noMatch :", state.noMatch);
 	return (
 		<div className={classes.root}>
 			<Fade in={visible}>
@@ -102,20 +132,40 @@ export default function Settings() {
 				</div>
 			</Fade>
 			{state.error && (
-				<div className={classes.error}>
-					<Typography variant="h5">Error</Typography>
-					<Typography variant="subtitle1" gutterBottom>
-						There has been an error
-					</Typography>
-					<Button
-						color="inherit"
-						variant="outlined"
-						className={classes.button}
-						onClick={handleClick}
-					>
-						Close
-					</Button>
-				</div>
+				<Fade in={errorVisible}>
+					<div className={classes.error}>
+						<Typography variant="h5">Error</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							The data couldn't be retrieved.
+						</Typography>
+						<Button
+							color="inherit"
+							variant="outlined"
+							className={classes.button}
+							onClick={handleErrorClick}
+						>
+							Close
+						</Button>
+					</div>
+				</Fade>
+			)}
+			{state.noMatch && (
+				<Fade in={noMatchVisible}>
+					<div className={classes.noMatch}>
+						<Typography variant="h5">No results</Typography>
+						<Typography variant="subtitle1" gutterBottom>
+							There are no matches in our records.
+						</Typography>
+						<Button
+							color="inherit"
+							variant="outlined"
+							className={classes.button}
+							onClick={handleNoMatchClick}
+						>
+							Close
+						</Button>
+					</div>
+				</Fade>
 			)}
 			<div>
 				<ChartSettings />
