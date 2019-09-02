@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { PanelContext } from "../../contexts/SettingsProvider";
 import { AppContext } from "../../contexts/AppProvider";
 import { baseUrl } from "../../Utils";
@@ -9,10 +9,10 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
-
 import Button from "@material-ui/core/Button";
-
 import TextField from "@material-ui/core/TextField";
+
+import { isEqual } from "lodash";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -32,13 +32,16 @@ const useStyles = makeStyles(theme => ({
 		marginLeft: theme.spacing(1),
 		marginRight: theme.spacing(1),
 		width: 200,
-		display: "block"
+		display: "block",
+		overflow: "visible"
 	},
 	container: {
 		display: "block"
 	},
 	button: {
-		margin: theme.spacing(1)
+		margin: theme.spacing(1),
+		backgroundColor: "#f1ad36",
+		color: "white"
 	},
 	input: {
 		display: "none"
@@ -49,10 +52,14 @@ export default function ManagerSettings() {
 	const classes = useStyles();
 	const [expanded, updatePanelState] = useContext(PanelContext);
 	const { state, setState } = useContext(AppContext);
-
 	const [values, setValues] = useState({
 		managerId: state.managerId
 	});
+	const [previousValues, setPreviousValues] = useState({
+		managerId: null
+	});
+	const [disabled, setDisabled] = useState(false);
+	const [buttonTitle, setButtonTitle] = useState("Find Manager");
 
 	const handleChange = panel => (event, expanded) => {
 		updatePanelState(expanded ? panel : false);
@@ -64,11 +71,30 @@ export default function ManagerSettings() {
 		setValues({ ...values, [name]: newvalue });
 	};
 
-	const handleClick = () => {
+	const handleClick = e => {
+		setDisabled(true);
 		const { managerId } = values;
 		const url = `${baseUrl}?manager=${managerId}`;
-		setState({ url });
+		setState({ url, goFetch: true });
 	};
+
+	useEffect(() => {
+		if (!isEqual(values, previousValues)) {
+			setDisabled(false);
+			setButtonTitle("Find Manager");
+		} else {
+			setDisabled(true);
+			setButtonTitle("See the results >>");
+		}
+	}, [values, previousValues]);
+
+	useEffect(() => {
+		if (expanded !== "panel2") {
+			setDisabled(false);
+			setPreviousValues({ managerId: null });
+			setButtonTitle("Find Manager");
+		}
+	}, [expanded]);
 
 	return (
 		<ExpansionPanel
@@ -95,14 +121,15 @@ export default function ManagerSettings() {
 						onChange={handleValueChange("managerId")}
 						margin="normal"
 						type="number"
+						variant="outlined"
 					/>
 					<Button
-						color="primary"
 						variant="contained"
 						className={classes.button}
 						onClick={handleClick}
+						disabled={disabled}
 					>
-						Search Manager
+						{buttonTitle}
 					</Button>
 				</form>
 			</ExpansionPanelDetails>

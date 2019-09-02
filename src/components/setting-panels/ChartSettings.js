@@ -1,6 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { PanelContext } from "../../contexts/SettingsProvider";
 import { AppContext } from "../../contexts/AppProvider";
+// import { baseUrl } from "../../Utils";
 
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -8,10 +9,14 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
-
 import Button from "@material-ui/core/Button";
-
 import TextField from "@material-ui/core/TextField";
+
+import { isEqual } from "lodash";
+
+const baseUrl = new URL(
+	"https://2jdg5klzl0.execute-api.us-west-1.amazonaws.com/default/EmployeesChart-Api"
+);
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -30,11 +35,14 @@ const useStyles = makeStyles(theme => ({
 	textField: {
 		marginLeft: theme.spacing(1),
 		marginRight: theme.spacing(1),
-		width: 200
+		width: 200,
+		overflow: "visible"
 	},
 	button: {
 		margin: theme.spacing(1),
-		display: "block"
+		display: "block",
+		backgroundColor: "#022be8",
+		color: "white"
 	},
 	input: {
 		display: "none"
@@ -49,6 +57,12 @@ export default function ChartSettings() {
 		limit: state.limit,
 		offset: state.offset
 	});
+	const [previousValues, setPreviousValues] = useState({
+		limit: null,
+		offset: null
+	});
+	const [disabled, setDisabled] = useState(false);
+	const [buttonTitle, setButtonTitle] = useState("Generate Chart");
 
 	const handleChange = panel => (event, expanded) => {
 		updatePanelState(expanded ? panel : false);
@@ -60,9 +74,35 @@ export default function ChartSettings() {
 		setValues({ ...values, [name]: newvalue });
 	};
 
+	// effect to avoid re submitting request if values are the same
+	useEffect(() => {
+		if (!isEqual(values, previousValues)) {
+			setDisabled(false);
+			setButtonTitle("Generate Chart");
+		} else {
+			setDisabled(true);
+			setButtonTitle("See the results >>");
+		}
+	}, [values, previousValues]);
+
+	useEffect(() => {
+		if (expanded !== "panel1") {
+			setDisabled(false);
+			setPreviousValues({ limit: null, offset: null });
+			setButtonTitle("Generate Chart");
+		}
+	}, [expanded]);
+
 	const handleClick = () => {
+		setDisabled(true);
 		const { limit, offset } = values;
-		setState({ limit, offset, fullSearch: true });
+		setPreviousValues({ limit, offset });
+
+		const params = Object.assign({ limit, offset });
+		Object.keys(params).forEach(key =>
+			baseUrl.searchParams.append(key, params[key])
+		);
+		setState({ url: baseUrl, goFetch: true });
 	};
 
 	return (
@@ -92,6 +132,7 @@ export default function ChartSettings() {
 						value={parseInt(values.limit)}
 						onChange={handleValueChange("limit")}
 						margin="normal"
+						variant="outlined"
 					/>
 					<TextField
 						type="number"
@@ -101,14 +142,15 @@ export default function ChartSettings() {
 						value={parseInt(values.offset)}
 						onChange={handleValueChange("offset")}
 						margin="normal"
+						variant="outlined"
 					/>
 					<Button
-						color="primary"
 						variant="contained"
 						className={classes.button}
 						onClick={handleClick}
+						disabled={disabled}
 					>
-						Generate Chart
+						{buttonTitle}
 					</Button>
 				</form>
 			</ExpansionPanelDetails>
